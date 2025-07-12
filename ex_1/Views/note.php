@@ -30,6 +30,11 @@
             </tr>
         </tbody>
     </table>
+    <?php
+    if ($note['attachment'] != null) {
+        echo "<img src='../uploads/{$note['attachment']}' />";
+    }
+    ?>
 </body>
 
 </html>
