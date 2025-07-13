@@ -1,1 +1,1 @@
-# Repo contains my PHP exercises 
+# Repo contains simple PHP exercises 
