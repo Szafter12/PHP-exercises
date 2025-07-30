@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__ . '/Core/router.php';
-require_once __DIR__ . '/Controllers/NoteController.php';
+require_once __DIR__ . "/../vendor/autoload.php";
+
+use App\Controllers\NoteController;
+use App\Core\Router;
 
 $router = new Router();
 

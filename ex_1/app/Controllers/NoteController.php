@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Models\Note;
+
 class NoteController
 {
     public function index()
@@ -28,10 +32,10 @@ class NoteController
     public function store()
     {
         if (isset($_POST['save_note'])) {
-            $note_id = self::getNoteId();
+            $note_id = Note::getNoteId();
             $note_title = $_POST['title'] ?? null;
             $note_description = $_POST['description'] ?? null;
-            $date = new DateTime();
+            $date = new \DateTime();
             $created_at = $date->format('c');
             $file = $this->extractFile('attached_file');
 
@@ -53,14 +57,8 @@ class NoteController
                 'attachment' => $file_name
             ];
 
-            $notes = json_decode(file_get_contents(__DIR__ . '/../storage/notes.json'), true);
-
-            array_push($notes, $new_note);
-
-            if (file_put_contents(__DIR__ . '/../storage/notes.json', json_encode($notes),) != false) {
-                header("Location: /");
-                exit;
-            }
+            $note = new Note();
+            $note->save($new_note);
         }
     }
 
@@ -104,26 +102,16 @@ class NoteController
 
     public function add_note()
     {
-        self::getNoteId();
+        Note::getNoteId();
 
         return include_once __DIR__ . '/../Views/add_note.php';
     }
 
     public static function formatDate($timestamp)
     {
-        $date = new DateTime($timestamp);
+        $date = new \DateTime($timestamp);
         $date = date_format($date, 'd-m-Y');
 
         return $date;
-    }
-
-    protected static function getNoteId()
-    {
-        $notes = json_decode(file_get_contents(__DIR__ . '/../storage/notes.json'), true);
-
-        $notes_count = count($notes);
-        $note_id = (int)$notes_count + 1;
-
-        return $note_id;
     }
 }
