@@ -23,4 +23,20 @@ class Note {
                 exit;
             }
     }
+
+    public static function get() {
+        return json_decode(file_get_contents(__DIR__ . '/../storage/notes.json'), true);
+    }
+
+    public static function find($id) {
+        $notes = self::get();
+        $note = null;
+        foreach ($notes as $el) {
+            if ($el['id'] === $id) {
+                $note = $el;
+                break;
+            }
+        }
+        return $note;
+    } 
 }

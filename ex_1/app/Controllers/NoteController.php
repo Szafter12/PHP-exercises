@@ -8,25 +8,17 @@ class NoteController
 {
     public function index()
     {
-        $notes = json_decode(file_get_contents(__DIR__ . '/../storage/notes.json'), true);
+        $notes = Note::get();
 
-        include_once __DIR__ . '/../Views/note_list.php';
+        return include_once __DIR__ . '/../Views/note_list.php';
     }
 
     public function show($params)
     {
         $note_id = (int)$params['id'];
-        $notes = json_decode(file_get_contents(__DIR__ . '/../storage/notes.json'), true);
-        $note = null;
+        $note = Note::find($note_id);
 
-        foreach ($notes as $el) {
-            if ($el['id'] === $note_id) {
-                $note = $el;
-                break;
-            }
-        }
-
-        include_once __DIR__ . '/../Views/note.php';
+        return include_once __DIR__ . '/../Views/note.php';
     }
 
     public function store()
@@ -42,8 +34,6 @@ class NoteController
             if (!is_array($file)) {
                 return;
             }
-
-            $file_path = null;
 
             if (!empty($file)) {
                 $file_name = $file[0];
@@ -73,7 +63,7 @@ class NoteController
             }
 
             $allowed_ext = ['jpg', 'png', 'jpeg', 'webp'];
-            $max_size = 6 * 1024 * 1024;
+            $max_size = 1;
 
             $filename = $_FILES[$field_name]['name'];
             $file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
