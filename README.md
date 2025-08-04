@@ -1,4 +1,4 @@
-# Repo contains simple exercises to practice more advanced topics in PHP such as:
+### Repo contains simple exercises to practice more advanced topics in PHP such as:
 - Dependecy Injection
 - Doctrine ORM
 - Slim framework
