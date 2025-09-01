@@ -2,5 +2,5 @@
 - Dependecy Injection
 - Doctrine ORM
 - Slim framework
-- Php testing libraries
+- PHP testing libraries
 - Advanced OOP concepts
