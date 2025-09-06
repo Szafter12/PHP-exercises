@@ -4,3 +4,5 @@
 - Slim framework
 - PHP testing libraries
 - Advanced OOP concepts
+- Testing in PHP
+- Template engines like blade and twig
